@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACH Level 3 Technician Training Portal</title>
+    <style>
+        :root {
+            --primary: #1a4d2e;
+            --secondary: #4f6f52;
+            --accent: #d0e7d2;
+            --light: #f9f9f9;
+            --dark: #333;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        nav {
+            background-color: var(--secondary);
+            padding: 0.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        nav a:hover {
+            background-color: var(--primary);
+        }
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 { color: var(--primary); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th { background-color: var(--accent); }
+        .pin-protection {
+            background: #fff3cd;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        input[type="text"], input[type="date"], input[type="password"] {
+            padding: 6px;
+            margin: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover { background-color: var(--secondary); }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Animal Care Hospital of Walnut Creek</h1>
+    <p>Level 3 Technician Training — Anesthesia & Surgery Reference Portal</p>
+</header>
+
+<nav>
+    <a href="#checklist">Training Checklist</a>
+    <a href="#intubation">Intubation Prep</a>
+    <a href="#monitoring">Monitoring Parameters</a>
+    <a href="#calculations">Drug Calculations</a>
+</nav>
+
+<div class="container">
+
+    <!-- Checklist Section -->
+    <div id="checklist" class="card">
+        <h2>Level 3 Training Checklist</h2>
+        <div class="pin-protection">
+            <label for="mentorPin"><strong>Mentor Edit Access:</strong></label>
+            <input type="password" id="mentorPin" placeholder="Enter Mentor PIN">
+            <button onclick="unlockChecklist()">Unlock Editing</button>
+            <span id="pinStatus" style="margin-left: 10px; font-weight: bold;"></span>
+        </div>
+
+        <form id="checklistForm">
+            <h3>Client Communication</h3>
+            <table>
+                <tr>
+                    <th>Skill / Objective</th>
+                    <th>Done</th>
+                    <th>Initials</th>
+                    <th>Date</th>
+                </tr>
+                <tr>
+                    <td>Surgical case intake (spay, neuter, mass removal, ortho)</td>
+                    <td><input type="checkbox" class="chk" disabled></td>
+                    <td><input type="text" class="init" size="4" disabled></td>
+                    <td><input type="date" class="dt" disabled></td>
+                </tr>
+                <tr>
+                    <td>Surgical case discharge</td>
+                    <td><input type="checkbox" class="chk" disabled></td>
+                    <td><input type="text" class="init" size="4" disabled></td>
+                    <td><input type="date" class="dt" disabled></td>
+                </tr>
+            </table>
+
+            <h3>Anesthesia Machine & Surgical Prep</h3>
+            <table>
+                <tr>
+                    <th>Skill / Objective</th>
+                    <th>Done</th>
+                    <th>Initials</th>
+                    <th>Date</th>
+                </tr>
+                <tr>
+                    <td>Bain (non-rebreathing) vs. rebreathing circuit setup</td>
+                    <td><input type="checkbox" class="chk" disabled></td>
+                    <td><input type="text" class="init" size="4" disabled></td>
+                    <td><input type="date" class="dt" disabled></td>
+                </tr>
+                <tr>
+                    <td>Reservoir bag calculation</td>
+                    <td><input type="checkbox" class="chk" disabled></td>
+                    <td><input type="text" class="init" size="4" disabled></td>
+                    <td><input type="date" class="dt" disabled></td>
+                </tr>
+                <tr>
+                    <td>Perform machine pressure check</td>
+                    <td><input type="checkbox" class="chk" disabled></td>
+                    <td><input type="text" class="init" size="4" disabled></td>
+                    <td><input type="date" class="dt" disabled></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <!-- Quick Reference Section -->
+    <div id="monitoring" class="card">
+        <h2>Anesthetic Monitoring Targets</h2>
+        <table>
+            <tr>
+                <th>Parameter</th>
+                <th>Dog Normals</th>
+                <th>Cat Normals</th>
+                <th>Notify Doctor If</th>
+            </tr>
+            <tr>
+                <td>Heart Rate</td>
+                <td>60–120 bpm</td>
+                <td>100–160 bpm</td>
+                <td>Outside range, arrhythmia, pulse deficit</td>
+            </tr>
+            <tr>
+                <td>Mean Arterial Pressure (MAP)</td>
+                <td>70–100 mmHg</td>
+                <td>70–100 mmHg</td>
+                <td>MAP &lt; 70 mmHg (Urgent &lt; 60 mmHg)</td>
+            </tr>
+            <tr>
+                <td>SpO2</td>
+                <td>&ge; 95%</td>
+                <td>&ge; 95%</td>
+                <td>&lt; 95% (Urgent &lt; 90%)</td>
+            </tr>
+            <tr>
+                <td>ETCO2</td>
+                <td>35–45 mmHg</td>
+                <td>35–45 mmHg</td>
+                <td>&lt; 30 or &gt; 50 mmHg</td>
+            </tr>
+            <tr>
+                <td>Body Temperature</td>
+                <td>&ge; 98.0°F</td>
+                <td>&ge; 98.0°F</td>
+                <td>&lt; 98.0°F or &gt; 103.5°F</td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="calculations" class="card">
+        <h2>Quick Formulas</h2>
+        <ul>
+            <li><strong>Drug Volume (mL):</strong> [Weight (kg) &times; Dose (mg/kg)] &divide; Concentration (mg/mL)</li>
+            <li><strong>Fluid Rate (Anesthesia):</strong> Dogs = 5 mL/kg/hr | Cats = 3 mL/kg/hr</li>
+            <li><strong>Reservoir Bag Size:</strong> Weight (kg) &times; 60 mL/kg (Round up to nearest 0.5L, 1L, 2L, 3L, 5L)</li>
+        </ul>
+    </div>
+
+</div>
+
+<script>
+    const MENTOR_PIN = "1234"; // Set your preferred mentor PIN here
+
+    function unlockChecklist() {
+        const pinInput = document.getElementById("mentorPin").value;
+        const status = document.getElementById("pinStatus");
+        const inputs = document.querySelectorAll(".chk, .init, .dt");
+
+        if (pinInput === MENTOR_PIN) {
+            status.textContent = "Unlocked!";
+            status.style.color = "green";
+            inputs.forEach(input => input.removeAttribute("disabled"));
+        } else {
+            status.textContent = "Incorrect PIN";
+            status.style.color = "red";
+            inputs.forEach(input => input.setAttribute("disabled", "true"));
+        }
+    }
+</script>
+
+</body>
+</html>
