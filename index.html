@@ -1,381 +1,353 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACH Level 3 Technician Training Portal</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --primary: #1a4d2e;
-            --secondary: #4f6f52;
-            --accent: #d0e7d2;
-            --light: #f4f6f4;
-            --dark: #222;
-            --warning: #fff3cd;
-            --danger: #f8d7da;
+            --primary: #0f4c3a;
+            --primary-light: #1e6b54;
+            --accent: #2a9d8f;
+            --bg-light: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-dark: #2d3748;
+            --text-muted: #718096;
+            --border-color: #e2e8f0;
+            --warning-bg: #fffaf0;
+            --warning-border: #dd6b20;
+            --danger-bg: #fff5f5;
+            --danger-border: #e53e3e;
+            --success-bg: #f0fff4;
+            --success-border: #38a169;
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: var(--light);
-            color: var(--dark);
-        }
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 2rem 1rem;
-            text-align: center;
-        }
-        header h1 { margin: 0; font-size: 1.8rem; }
-        header p { margin: 5px 0 0; opacity: 0.9; }
-        nav {
-            background-color: var(--secondary);
-            padding: 0.5rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
             display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            flex-direction: column;
+            min-height: 100vh;
         }
-        nav a {
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            text-decoration: none;
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: bold;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
-        nav a:hover { background-color: var(--primary); }
-        .container {
-            max-width: 1100px;
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .header-title h1 { font-size: 1.6rem; font-weight: 700; }
+        .header-title p { font-size: 0.9rem; opacity: 0.9; }
+
+        /* SEARCH BAR */
+        .search-box {
+            position: relative;
+            min-width: 280px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            font-size: 0.9rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        /* MAIN CONTAINER */
+        .app-container {
+            max-width: 1200px;
             margin: 1.5rem auto;
             padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 1.5rem;
+            flex: 1;
+            width: 100%;
         }
-        .card {
-            background: white;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
+
+        /* SIDEBAR NAVIGATION */
+        sidebar {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            height: fit-content;
+            position: sticky;
+            top: 1.5rem;
+        }
+        .nav-group-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin: 1rem 0 0.5rem 0.5rem;
+            font-weight: 700;
+        }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.8rem;
+            color: var(--text-dark);
+            text-decoration: none;
             border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
-        h2 {
+        .nav-link:hover, .nav-link.active {
+            background-color: #e6f4f1;
             color: var(--primary);
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 0.3rem;
-            margin-top: 0;
         }
-        h3 { color: var(--secondary); margin-top: 1.2rem; }
+        .nav-link i { width: 18px; text-align: center; color: var(--accent); }
+
+        /* CONTENT CARDS */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+        .card-header i { font-size: 1.25rem; color: var(--accent); }
+        .card-header h2 { font-size: 1.3rem; color: var(--primary); font-weight: 600; }
+
+        /* TABLES */
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 1rem 0;
-            font-size: 0.92rem;
+            font-size: 0.9rem;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
+        th {
+            background-color: #f8fafc;
+            color: var(--text-dark);
+            font-weight: 600;
             text-align: left;
+            padding: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
         }
-        th { background-color: var(--accent); color: var(--primary); }
-        tr:nth-child(even) { background-color: #fcfcfc; }
-        .pin-protection {
-            background: var(--warning);
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 1.5rem;
-            border: 1px solid #ffeeba;
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
         }
-        input[type="text"], input[type="date"], input[type="password"] {
-            padding: 6px;
-            margin: 2px;
-            border: 1px solid #ccc;
+        tr:hover { background-color: #f8fafc; }
+
+        /* BADGES */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
             border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
-        button {
-            background-color: var(--primary);
+        .badge-danger { background: var(--danger-bg); color: var(--danger-border); border: 1px solid var(--danger-border); }
+        .badge-warning { background: var(--warning-bg); color: var(--warning-border); border: 1px solid var(--warning-border); }
+        .badge-success { background: var(--success-bg); color: var(--success-border); border: 1px solid var(--success-border); }
+
+        /* UNLOCK BOX */
+        .unlock-panel {
+            background: #edf2f7;
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        .unlock-panel input[type="password"] {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            outline: none;
+        }
+        .btn {
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 8px 14px;
-            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
             cursor: pointer;
-            font-weight: bold;
+            transition: background 0.2s;
         }
-        button:hover { background-color: var(--secondary); }
-        .alert-box {
-            background-color: var(--danger);
-            border-left: 5px solid #dc3545;
+        .btn:hover { background: var(--primary-light); }
+
+        /* ALERT BOXES */
+        .alert {
             padding: 1rem;
+            border-radius: 8px;
             margin: 1rem 0;
-            border-radius: 4px;
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
         }
-        .resource-list a {
-            color: var(--primary);
-            font-weight: bold;
-            word-break: break-all;
+        .alert-danger { background: var(--danger-bg); border-left: 4px solid var(--danger-border); color: #742a2a; }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .app-container { grid-template-columns: 1fr; }
+            sidebar { position: static; }
+            .search-box { width: 100%; }
         }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Animal Care Hospital of Walnut Creek</h1>
-    <p>Level 3 Veterinary Technician Training — Anesthesia & Surgery Portal</p>
-    <small>Revised: October 8, 2026 | 130 La Casa Via Suite 103A, Walnut Creek, CA 94598</small>
+    <div class="header-content">
+        <div class="header-title">
+            <h1><i class="fa-solid fa-notes-medical"></i> ACH Training Portal</h1>
+            <p>Level 3 Technician Training — Surgery & Anesthesia</p>
+        </div>
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Search parameters, drugs, steps..." onkeyup="filterContent()">
+        </div>
+    </div>
 </header>
 
-<nav>
-    <a href="#welcome">Welcome</a>
-    <a href="#checklist">Checklist</a>
-    <a href="#resources">Resources</a>
-    <a href="#intake">Check-In & Discharge</a>
-    <a href="#instruments">Instruments</a>
-    <a href="#intubation">Intubation</a>
-    <a href="#calculations">Calculations</a>
-    <a href="#monitoring">Monitoring</a>
-    <a href="#hypotension">Hypotension</a>
-    <a href="#arrhythmias">Arrhythmias</a>
-    <a href="#hypothermia">Warming</a>
-    <a href="#boas">BOAS</a>
-    <a href="#recovery">Recovery</a>
-</nav>
+<div class="app-container">
+    <sidebar>
+        <div class="nav-group-title">Overview</div>
+        <a href="#welcome" class="nav-link"><i class="fa-solid fa-house"></i> Welcome</a>
+        <a href="#checklist" class="nav-link"><i class="fa-solid fa-list-check"></i> Checklist</a>
+        <a href="#resources" class="nav-link"><i class="fa-solid fa-link"></i> External Links</a>
+        
+        <div class="nav-group-title">Clinical References</div>
+        <a href="#intake" class="nav-link"><i class="fa-solid fa-clipboard-user"></i> Check-In / Out</a>
+        <a href="#instruments" class="nav-link"><i class="fa-solid fa-scissors"></i> Instruments</a>
+        <a href="#intubation" class="nav-link"><i class="fa-solid fa-lungs"></i> Intubation</a>
+        <a href="#calculations" class="nav-link"><i class="fa-solid fa-calculator"></i> Calculations</a>
+        <a href="#monitoring" class="nav-link"><i class="fa-solid fa-heart-pulse"></i> Monitoring</a>
+        <a href="#hypotension" class="nav-link"><i class="fa-solid fa-gauge-simple-high"></i> Hypotension</a>
+        <a href="#arrhythmias" class="nav-link"><i class="fa-solid fa-wave-square"></i> Arrhythmias</a>
+        <a href="#hypothermia" class="nav-link"><i class="fa-solid fa-temperature-low"></i> Active Warming</a>
+        <a href="#boas" class="nav-link"><i class="fa-solid fa-dog"></i> BOAS Protocol</a>
+        <a href="#recovery" class="nav-link"><i class="fa-solid fa-bed"></i> Recovery</a>
+    </sidebar>
 
-<div class="container">
-
-    <!-- WELCOME SECTION -->
-    <div id="welcome" class="card">
-        <h2>Level 3 Welcome</h2>
-        <p>Welcome to Level 3 of the ACH training program. By now you have worked through the foundations of veterinary nursing and demonstrated the dependability, aptitude, and work ethic required for this next level.</p>
-        <p>You already hold most of the skills this role asks for: patient handling, medication knowledge, and teamwork. What changes at Level 3 is moving into the surgery suite, where the stakes are higher and the patient depends entirely on the team around them. By the end of Level 3, you will feel confident managing general anesthesia and understanding procedure-specific requirements.</p>
-    </div>
-
-    <!-- INTERACTIVE CHECKLIST -->
-    <div id="checklist" class="card">
-        <h2>Level 3 Technician Training Checklist</h2>
-        <div class="pin-protection">
-            <label for="mentorPin"><strong>Mentor Edit Unlock:</strong></label>
-            <input type="password" id="mentorPin" placeholder="Enter PIN">
-            <button onclick="unlockChecklist()">Unlock Checklist</button>
-            <span id="pinStatus" style="margin-left: 10px; font-weight: bold;"></span>
-            <small style="display:block; margin-top:5px; color:#666;">Default PIN is <strong>1234</strong> (can be changed in code).</small>
+    <main id="mainContent">
+        <!-- WELCOME CARD -->
+        <div id="welcome" class="card searchable">
+            <div class="card-header">
+                <i class="fa-solid fa-circle-info"></i>
+                <h2>Level 3 Program Welcome</h2>
+            </div>
+            <p>Welcome to Level 3 of the ACH training program. By now you have worked through the foundations of veterinary nursing and demonstrated the dependability, aptitude, and work ethic required for this next level.</p>
+            <p style="margin-top:0.75rem;">You will be moving into the surgery suite, where the stakes are higher and the patient depends entirely on the surgical team. By the end of Level 3, you should feel confident managing patients under general anesthesia across abdominal, ophthalmic, and orthopedic procedures.</p>
         </div>
 
-        <form id="checklistForm">
-            <h3>1. Client Communication</h3>
-            <table>
-                <tr><th>Skill / Objective</th><th>Done</th><th>Initials</th><th>Date</th></tr>
-                <tr><td>Surgical case intake (neuter, spay, mass removal, orthopedic)</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Surgical case discharge</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-            </table>
+        <!-- CHECKLIST CARD -->
+        <div id="checklist" class="card searchable">
+            <div class="card-header">
+                <i class="fa-solid fa-check-double"></i>
+                <h2>Level 3 Training Checklist</h2>
+            </div>
+            <div class="unlock-panel">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="mentorPin" placeholder="Enter Mentor PIN">
+                <button class="btn" onclick="unlockChecklist()">Unlock Editing</button>
+                <span id="pinStatus" style="font-weight: 600;"></span>
+                <small style="color:var(--text-muted); display:block; width:100%;">Default PIN is <strong>1234</strong>. All progress auto-saves to this browser.</small>
+            </div>
 
-            <h3>2. Anesthesia Machine & Surgical Prep Knowledge</h3>
-            <table>
-                <tr><th>Skill / Objective</th><th>Done</th><th>Initials</th><th>Date</th></tr>
-                <tr><td>Bain (non-rebreathing) vs. rebreathing circuit setup</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Reservoir bag calculation</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Demonstrate general anesthetic machine operation</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Demonstrate pressure check performance</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Monitoring machine setup and maintenance</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Bair Hugger setup</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Electrocautery setup</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Surgical suction setup</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Water blanket setup</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Surgical instrument knowledge</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Surgical site prep: Abdominal surgery</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Surgical site prep: Neuter / Mass removal</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Surgical site prep: Ophthalmic surgery</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Surgical site prep: TPLO surgery (with specialist)</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-            </table>
+            <form id="checklistForm">
+                <h3 style="color:var(--primary); margin: 1rem 0 0.5rem;">Client Communication</h3>
+                <table>
+                    <tr><th>Skill / Objective</th><th style="width:70px;">Done</th><th style="width:90px;">Initials</th><th style="width:140px;">Date</th></tr>
+                    <tr><td>Surgical case intake (neuter, spay, mass removal, ortho)</td><td><input type="checkbox" class="chk" disabled onclick="saveProgress()"></td><td><input type="text" class="init" style="width:100%" disabled onchange="saveProgress()"></td><td><input type="date" class="dt" style="width:100%" disabled onchange="saveProgress()"></td></tr>
+                    <tr><td>Surgical case discharge</td><td><input type="checkbox" class="chk" disabled onclick="saveProgress()"></td><td><input type="text" class="init" style="width:100%" disabled onchange="saveProgress()"></td><td><input type="date" class="dt" style="width:100%" disabled onchange="saveProgress()"></td></tr>
+                </table>
 
-            <h3>3. Anesthesia Performance</h3>
-            <table>
-                <tr><th>Skill / Objective</th><th>Done</th><th>Initials</th><th>Date</th></tr>
-                <tr><td>Normal parameters: Temp, RR, HR, BP, ECG, ETCO2</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Arrhythmias: 1st, 2nd, 3rd AV block, V-Tach, A-Fib, V-Fib</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Intubation with proper laryngoscope use</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Recover patient</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>BOAS risk factor knowledge</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Acceptable active warming methods</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>CPR knowledge (from previous module)</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Discuss Blood Pressure, HR, Temp under anesthesia</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-                <tr><td>Discuss MAC general terms & MAC-sparing drugs</td><td><input type="checkbox" class="chk" disabled></td><td><input type="text" class="init" size="4" disabled></td><td><input type="date" class="dt" disabled></td></tr>
-            </table>
-        </form>
-    </div>
-
-    <!-- EXTERNAL RESOURCE LIST -->
-    <div id="resources" class="card">
-        <h2>Level 3 Resource & Video Links</h2>
-        <ul class="resource-list">
-            <li><strong>Dimensional Analysis & Drug Calculations:</strong> <a href="https://www.youtube.com/watch?v=AZvqGrOVIxk" target="_blank">YouTube Video</a></li>
-            <li><strong>Cardiovascular System Effects Under Anesthesia:</strong> <a href="https://www.youtube.com/watch?v=AZvqGrOVIxk" target="_blank">Lecture Video</a></li>
-            <li><strong>Feline Induction & Intubation:</strong> <a href="https://vod.video.cornell.edu/media/Feline+Induction+and+Intubation/1_Iphqyi6g" target="_blank">Cornell Video</a></li>
-            <li><strong>Canine Intubation:</strong> <a href="https://www.youtube.com/watch?v=K2MxdKSK3cg" target="_blank">YouTube Video</a></li>
-            <li><strong>Abdominal Prep:</strong> <a href="https://www.youtube.com/watch?v=ZIS9HoHfHiA" target="_blank">YouTube Video</a></li>
-            <li><strong>Ophthalmic Prep:</strong> <a href="https://booksite.elsevier.com/9780702034299/chap_02.html" target="_blank">Elsevier Clinical Guide</a></li>
-            <li><strong>TPLO Prep:</strong> <a href="https://www.youtube.com/watch?v=MYpPDmEJ6hU" target="_blank">YouTube Video</a></li>
-            <li><strong>Arrhythmia Guide & Lecture:</strong> <a href="https://www.merckvetmanual.com/circulatory-system/heart-disease-conduction-abnormalities-in-dogs-and-cats/heart-disease-conduction-abnormalities-in-dogs-and-cats" target="_blank">Merck Manual</a> | <a href="https://www.youtube.com/watch?v=DKwZ60MzpdY" target="_blank">Lecture Video</a></li>
-            <li><strong>BOAS Anesthesia & Analgesia:</strong> <a href="https://todaysveterinarypractice.com/anesthesiology/anesthesia-and-analgesia-in-brachycephalic-dogs/" target="_blank">Today's Vet Practice</a></li>
-            <li><strong>Pressure Check & Machine Operation:</strong> <a href="https://www.youtube.com/watch?v=eKJRTpwcfkY" target="_blank">Pressure Check Video</a> | <a href="https://www.youtube.com/watch?v=_xqNNwY2ZEY" target="_blank">General Machine Video</a></li>
-        </ul>
-    </div>
-
-    <!-- CHECK-IN & DISCHARGE -->
-    <div id="intake" class="card">
-        <h2>Anesthetic Procedure Check-In & Discharge</h2>
-        <h3>Check-In Protocols</h3>
-        <ul>
-            <li><strong>Confirm Fasting:</strong> Withhold food after 10 PM the night prior.</li>
-            <li><strong>Mark Surgical Site:</strong> Mark site before patient moves to back (e.g., specific leg for orthopedics, specific growth for mass removal).</li>
-            <li><strong>Obtain TPR:</strong> Record temperature, pulse, respiration. Confirm high/low aural temp with a rectal reading.</li>
-            <li><strong>Obtain Weight:</strong> Weigh immediately; all drug calculations depend on this.</li>
-            <li><strong>Label Kennel:</strong> Patient name, client name, procedure.</li>
-            <li><em>Notify doctor if patient was not fasted or has an abnormal rectal temp.</em></li>
-        </ul>
-        <h3>Discharge Topics by Procedure</h3>
-        <table>
-            <tr><th>Procedure</th><th>Recovery Topics to Review</th></tr>
-            <tr><td>Spay / Neuter</td><td>Incision care, E-collar use, activity restriction until recheck.</td></tr>
-            <tr><td>Mass Removal</td><td>Incision/suture care, E-collar use, suture removal date, biopsy timeframe.</td></tr>
-            <tr><td>Abdominal Surgery</td><td>Strict activity restriction, feeding instructions, warning signs (vomiting, lethargy).</td></tr>
-            <tr><td>COHAT (Dental)</td><td>Soft food, no hard treats/chews, medications, monitor for bleeding/swelling.</td></tr>
-            <tr><td>Orthopedic Surgery</td><td>Strict activity restriction (leash walk only), bandage/splint care, recheck timeline.</td></tr>
-        </table>
-    </div>
-
-    <!-- SURGICAL INSTRUMENTS -->
-    <div id="instruments" class="card">
-        <h2>Surgical Instrument Quick Reference</h2>
-        <ul>
-            <li><strong>Towel Clamps:</strong> Penetrating (first layer/drapes to skin only); Non-Penetrating (second drape).</li>
-            <li><strong>Scissors:</strong> Utility (drapes/suture, never cut skin); Bandage; Suture (hooked blade); Metzenbaum (delicate dissection, bladder/stomach); Mayo (dense/heavy tissue).</li>
-            <li><strong>Thumb Forceps:</strong> Brown-Adson (suturing/general tissue); Rat Tooth (fascia/skin); DeBakey (delicate viscera).</li>
-            <li><strong>Tissue Forceps:</strong> Allis (crushing, tissue to be excised); Doyen (non-crushing, bowel clamping).</li>
-            <li><strong>Hemostats:</strong> Mosquito (small vessels/feline/pediatric); Kelly (serrations 1/2 way); Crile (serrations full length); Rochester-Carmalt (large dog spays, longitudinal serrations).</li>
-            <li><strong>Retractors & Suction:</strong> Gelpi (self-retaining orthopedic/neuro); Yankauer Tip (focal suction for soft tissue/masses).</li>
-        </ul>
-    </div>
-
-    <!-- INTUBATION -->
-    <div id="intubation" class="card">
-        <h2>Intubation Checklist</h2>
-        <h3>Preparation</h3>
-        <ul>
-            <li>Induction drugs (Propofol, Ket/Mid, Prop/Mid), Dry gauze, Sterile lubricant.</li>
-            <li>Selected ET tubes, Inelastic gauze, Laryngoscope, Oxygen mask.</li>
-            <li><strong>Cats only:</strong> Sterile cotton applicators & Lidocaine 2% (20 mg/mL) applied to arytenoids.</li>
-        </ul>
-        <h3>Procedure</h3>
-        <ol>
-            <li>Measure ET tube length from canine teeth to cranial margin of thoracic inlet.</li>
-            <li>Ensure IV catheter patency & administer induction agent to effect.</li>
-            <li>Use laryngoscope to visualize arytenoid cartilages, vocal folds, soft palate, and epiglottis.</li>
-            <li>Place ET tube to pre-measured depth, position patient, attach circuit.</li>
-            <li>Perform pressure check (leak appreciated at 20 cm H2O), start Isoflurane.</li>
-        </ol>
-    </div>
-
-    <!-- CALCULATIONS -->
-    <div id="calculations" class="card">
-        <h2>Anesthetic Drug Calculations & Formulas</h2>
-        <ul>
-            <li><strong>Drug Volume (mL):</strong> [Weight (kg) &times; Dose (mg/kg)] &divide; Concentration (mg/mL)</li>
-            <li><strong>mcg to mg:</strong> Divide by 1,000 (e.g., 8 mcg = 0.008 mg)</li>
-            <li><strong>% Solution to mg/mL:</strong> Multiply % by 10 (e.g., 2% Lidocaine = 20 mg/mL)</li>
-            <li><strong>Fluid Rates:</strong> Dogs = 5 mL/kg/hr | Cats = 3 mL/kg/hr</li>
-            <li><strong>Reservoir Bag Size:</strong> Weight (kg) &times; 60 mL/kg &divide; 1,000 = Bag Volume (L) (Round up to next size: 0.5, 1, 2, 3, or 5 L).</li>
-            <li><strong>MAC (Isoflurane):</strong> Dogs 1.28% | Cats 1.71% (Lowered by sedatives, opioids, and propofol).</li>
-        </ul>
-    </div>
-
-    <!-- MONITORING PARAMETERS -->
-    <div id="monitoring" class="card">
-        <h2>Anesthetic Monitoring Targets</h2>
-        <table>
-            <tr><th>Parameter</th><th>Dog Normal</th><th>Cat Normal</th><th>Notify Doctor If</th></tr>
-            <tr><td>Heart Rate</td><td>60–120 bpm</td><td>100–160 bpm</td><td>Outside range, pulse deficit, arrhythmia</td></tr>
-            <tr><td>Blood Pressure</td><td colspan="2">SAP 90–140 | MAP 70–100 | DAP 40–80 mmHg</td><td>MAP &lt; 70 (Urgent &lt; 60); SAP &lt; 90 or &gt; 160</td></tr>
-            <tr><td>Respiratory Rate</td><td colspan="2">Spontaneous: 8–20 | Manual: 6–10 breaths/min</td><td>&lt; 8 breaths/min or sustained apnea</td></tr>
-            <tr><td>ETCO2</td><td colspan="2">35–45 mmHg (FiCO2 = 0)</td><td>&lt; 30, &gt; 50, or any abrupt change</td></tr>
-            <tr><td>SpO2</td><td colspan="2">&ge; 95% (98–100% expected on 100% O2)</td><td>&lt; 95% (Urgent &lt; 90%)</td></tr>
-            <tr><td>Temperature</td><td colspan="2">Maintain &ge; 98.0°F</td><td>&lt; 98.0°F or &gt; 103.5°F</td></tr>
-        </table>
-        <small><em>Note: Record parameters every 5 minutes; Temperature every 15 minutes. Monitor until sternal, normothermic, and swallowing.</em></small>
-    </div>
-
-    <!-- HYPOTENSION -->
-    <div id="hypotension" class="card">
-        <h2>Hypotension Treatment Algorithm (MAP &lt; 60 mmHg)</h2>
-        <ol>
-            <li><strong>Check Anesthetic Depth:</strong> Inhalants cause vasodilation. If deep, turn Isoflurane down.</li>
-            <li><strong>Check Heart Rate:</strong> If low (bradycardia), notify doctor for Atropine (0.02 mg/kg IV).</li>
-            <li><strong>Fluid Bolus:</strong> Administer 10 mL/kg crystalloid bolus over 10 minutes if directed.</li>
-            <li><strong>Check Mechanical Causes:</strong> Ensure surgeon isn't leaning on patient or compressing caudal vena cava.</li>
-            <li><strong>Escalate:</strong> Persistent hypotension requires doctor direction for inotropes/vasopressors (Dobutamine 2–10 mcg/kg/min).</li>
-        </ol>
-    </div>
-
-    <!-- ARRHYTHMIAS -->
-    <div id="arrhythmias" class="card">
-        <h2>Arrhythmia Identification Reference</h2>
-        <ul>
-            <li><strong>VPCs:</strong> Wide & bizarre QRS, no P wave, T wave points opposite direction.</li>
-            <li><strong>Ventricular Tachycardia:</strong> Run of 3+ VPCs, HR &gt; 160–180 bpm, weak/absent pulses. Urgent.</li>
-            <li><strong>Atrial Fibrillation:</strong> Irregularly irregular rhythm, wavy baseline, absent P waves.</li>
-            <li><strong>1st-Degree AV Block:</strong> Long, constant P-R interval (&gt;0.13s dog, &gt;0.09s cat). Every P has a QRS.</li>
-            <li><strong>2nd-Degree AV Block:</strong> Intermittent dropped beats (P waves without QRS).</li>
-            <li><strong>3rd-Degree (Complete) AV Block:</strong> P waves and QRS operate completely independently. Slow escape rate (20–60 bpm).</li>
-            <li><strong>Ventricular Fibrillation:</strong> Chaotic baseline, no organized complexes, no pulse. Emergency CPR & Defibrillation required.</li>
-        </ul>
-    </div>
-
-    <!-- HYPOTHERMIA -->
-    <div id="hypothermia" class="card">
-        <h2>Anesthetic Hypothermia & Active Warming</h2>
-        <p>Anesthesia depresses thermoregulation. Cold patients metabolize drugs slower, require less inhalant (risk of accidental overdose), and experience impaired clotting/immune function.</p>
-        <h3>Accepted Active Warming Methods</h3>
-        <ul>
-            <li><strong>Approved Devices:</strong> Circulating Water Blankets & Bair Hugger forced-air warmers.</li>
-            <li><strong>Warm until:</strong> Patient reaches 98.6°F, then remove active heat sources.</li>
-        </ul>
-        <div class="alert-box">
-            <strong>CRITICAL WARNING: Never Use Improvised Heat Sources!</strong><br>
-            Hot water bottles, microwaved rice/bean bags, gloves with hot water, human heating pads, and heat lamps cause severe, full-thickness thermal burns on anesthetized patients.
+                <h3 style="color:var(--primary); margin: 1.5rem 0 0.5rem;">Anesthesia Machine & Surgical Prep</h3>
+                <table>
+                    <tr><th>Skill / Objective</th><th style="width:70px;">Done</th><th style="width:90px;">Initials</th><th style="width:140px;">Date</th></tr>
+                    <tr><td>Understand Bain (non-rebreathing) vs rebreathing circuit</td><td><input type="checkbox" class="chk" disabled onclick="saveProgress()"></td><td><input type="text" class="init" style="width:100%" disabled onchange="saveProgress()"></td><td><input type="date" class="dt" style="width:100%" disabled onchange="saveProgress()"></td></tr>
+                    <tr><td>Reservoir bag calculation</td><td><input type="checkbox" class="chk" disabled onclick="saveProgress()"></td><td><input type="text" class="init" style="width:100%" disabled onchange="saveProgress()"></td><td><input type="date" class="dt" style="width:100%" disabled onchange="saveProgress()"></td></tr>
+                    <tr><td>Demonstrate general anesthetic machine operation</td><td><input type="checkbox" class="chk" disabled onclick="saveProgress()"></td><td><input type="text" class="init" style="width:100%" disabled onchange="saveProgress()"></td><td><input type="date" class="dt" style="width:100%" disabled onchange="saveProgress()"></td></tr>
+                    <tr><td>Perform pressure check</td><td><input type="checkbox" class="chk" disabled onclick="saveProgress()"></td><td><input type="text" class="init" style="width:100%" disabled onchange="saveProgress()"></td><td><input type="date" class="dt" style="width:100%" disabled onchange="saveProgress()"></td></tr>
+                    <tr><td>Monitoring machine setup & maintenance</td><td><input type="checkbox" class="chk" disabled onclick="saveProgress()"></td><td><input type="text" class="init" style="width:100%" disabled onchange="saveProgress()"></td><td><input type="date" class="dt" style="width:100%" disabled onchange="saveProgress()"></td></tr>
+                    <tr><td>Bair Hugger & Water Blanket setup</td><td><input type="checkbox" class="chk" disabled onclick="saveProgress()"></td><td><input type="text" class="init" style="width:100%" disabled onchange="saveProgress()"></td><td><input type="date" class="dt" style="width:100%" disabled onchange="saveProgress()"></td></tr>
+                    <tr><td>Electrocautery & Surgical Suction setup</td><td><input type="checkbox" class="chk" disabled onclick="saveProgress()"></td><td><input type="text" class="init" style="width:100%" disabled onchange="saveProgress()"></td><td><input type="date" class="dt" style="width:100%" disabled onchange="saveProgress()"></td></tr>
+                    <tr><td>Surgical site prep: Abdominal, Ophthalmic, TPLO, Mass Removal</td><td><input type="checkbox" class="chk" disabled onclick="saveProgress()"></td><td><input type="text" class="init" style="width:100%" disabled onchange="saveProgress()"></td><td><input type="date" class="dt" style="width:100%" disabled onchange="saveProgress()"></td></tr>
+                </table>
+            </form>
         </div>
-    </div>
 
-    <!-- BOAS -->
-    <div id="boas" class="card">
-        <h2>Brachycephalic Airway (BOAS) Considerations</h2>
-        <p>Common in Bulldogs, Pugs, Boston Terriers, and Shih Tzus. High risk for upper airway obstruction during recovery.</p>
-        <ul>
-            <li><strong>Anatomic Concerns:</strong> Stenotic nares, elongated soft palate, everted laryngeal saccules, hypoplastic trachea, laryngeal collapse.</li>
-            <li><strong>Action Items:</strong> Have several smaller ET tube sizes ready. Inflate cuff immediately upon induction to protect against regurgitation/aspiration.</li>
-            <li><strong>Recovery Rule:</strong> Highest risk period is post-extubation. Keep in sternal recumbency, delay extubation until active swallowing, and <em>never leave unattended</em>.</li>
-        </ul>
-    </div>
+        <!-- MONITORING CARD -->
+        <div id="monitoring" class="card searchable">
+            <div class="card-header">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <h2>Anesthetic Monitoring Parameters</h2>
+            </div>
+            <table>
+                <tr><th>Parameter</th><th>Dog Target</th><th>Cat Target</th><th>Alert Doctor If</th></tr>
+                <tr><td><strong>Heart Rate</strong></td><td>60–120 bpm</td><td>100–160 bpm</td><td><span class="badge badge-warning">Outside range or arrhythmia</span></td></tr>
+                <tr><td><strong>MAP (BP)</strong></td><td>70–100 mmHg</td><td>70–100 mmHg</td><td><span class="badge badge-danger">MAP &lt; 70 (Urgent &lt; 60)</span></td></tr>
+                <tr><td><strong>SpO2</strong></td><td>&ge; 95%</td><td>&ge; 95%</td><td><span class="badge badge-danger">&lt; 95% (Urgent &lt; 90%)</span></td></tr>
+                <tr><td><strong>ETCO2</strong></td><td>35–45 mmHg</td><td>35–45 mmHg</td><td><span class="badge badge-warning">&lt; 30 or &gt; 50 mmHg</span></td></tr>
+                <tr><td><strong>Temperature</strong></td><td>&ge; 98.0°F</td><td>&ge; 98.0°F</td><td><span class="badge badge-warning">&lt; 98.0°F or &gt; 103.5°F</span></td></tr>
+            </table>
+        </div>
 
-    <!-- RECOVERY -->
-    <div id="recovery" class="card">
-        <h2>Anesthetic Recovery Protocol</h2>
-        <ul>
-            <li><strong>Extubation:</strong> Keep cuff inflated until patient actively swallows. Position in sternal recumbency with chin supported.</li>
-            <li><strong>Monitoring:</strong> TPR every 30 minutes until sternal and normothermic (&ge;98.6°F).</li>
-            <li><strong>Vocalization & Regurgitation:</strong> Alert doctor immediately if patient vocalizes excessively or regurgitates.</li>
-            <li><strong>Pain Scoring:</strong> Note that ACH will implement formal Glasgow Composite Pain Scale scoring in a future update.</li>
-        </ul>
-    </div>
-
+        <!-- HYPOTHERMIA CARD -->
+        <div id="hypothermia" class="card searchable">
+            <div class="card-header">
+                <i class="fa-solid fa-temperature-low"></i>
+                <h2>Anesthetic Hypothermia & Active Warming</h2>
+            </div>
+            <p>Anesthetic drugs impair thermoregulation. Hypothermia decreases drug clearance, prolongs recovery, and increases infection risk.</p>
+            
+            <div class="alert alert-danger" style="margin-top:1rem;">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size:1.5rem;"></i>
+                <div>
+                    <strong>NEVER USE IMPROVISED HEAT SOURCES:</strong><br>
+                    Hot water bottles, microwaved rice bags, latex gloves with hot water, human heating pads, and heat lamps cause severe, delayed tissue burns. Use <em>only</em> approved forced-air warmers or circulating water blankets.
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
 
 <script>
-    const MENTOR_PIN = "1234"; // Modify your mentor PIN here
+    const MENTOR_PIN = "1234";
 
     function unlockChecklist() {
         const pinInput = document.getElementById("mentorPin").value;
@@ -384,14 +356,69 @@
 
         if (pinInput === MENTOR_PIN) {
             status.textContent = "Unlocked!";
-            status.style.color = "green";
+            status.style.color = "var(--success-border)";
             inputs.forEach(input => input.removeAttribute("disabled"));
         } else {
             status.textContent = "Incorrect PIN";
-            status.style.color = "red";
-            inputs.forEach(input => input.setAttribute("disabled", "true"));
+            status.style.color = "var(--danger-border)";
         }
     }
+
+    // SEARCH FILTER
+    function filterContent() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const cards = document.querySelectorAll('.searchable');
+
+        cards.forEach(card => {
+            const text = card.textContent.toLowerCase();
+            card.style.display = text.includes(input) ? "block" : "none";
+        });
+    }
+
+    // SAVE & LOAD CHECKLIST PROGRESS FROM LOCAL STORAGE
+    function saveProgress() {
+        const form = document.getElementById('checklistForm');
+        const data = [];
+        const rows = form.querySelectorAll('tr');
+
+        rows.forEach((row, idx) => {
+            const chk = row.querySelector('.chk');
+            const init = row.querySelector('.init');
+            const dt = row.querySelector('.dt');
+            if (chk) {
+                data.push({
+                    id: idx,
+                    checked: chk.checked,
+                    initials: init.value,
+                    date: dt.value
+                });
+            }
+        });
+        localStorage.setItem('ach_checklist_data', JSON.stringify(data));
+    }
+
+    function loadProgress() {
+        const saved = localStorage.getItem('ach_checklist_data');
+        if (!saved) return;
+        const data = JSON.parse(saved);
+        const form = document.getElementById('checklistForm');
+        const rows = form.querySelectorAll('tr');
+
+        let dataIdx = 0;
+        rows.forEach((row) => {
+            const chk = row.querySelector('.chk');
+            const init = row.querySelector('.init');
+            const dt = row.querySelector('.dt');
+            if (chk && data[dataIdx]) {
+                chk.checked = data[dataIdx].checked;
+                init.value = data[dataIdx].initials;
+                dt.value = data[dataIdx].date;
+                dataIdx++;
+            }
+        });
+    }
+
+    window.onload = loadProgress;
 </script>
 
 </body>
